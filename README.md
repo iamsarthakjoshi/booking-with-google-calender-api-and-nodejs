@@ -23,7 +23,7 @@ Appointment Scheduling with Google Calender API and Node JS
 - For simplicity, use __UTC time__ for all bookings and days and __ISO 8601__ format for timeslots 
 
 
-### Endpoints 
+### Endpoints:
 
 #### GET bookable days
 Requires a year and month. Note that months __must not be zero-indexed__.
