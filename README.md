@@ -1,19 +1,19 @@
-# booking-with-google-calender-api-and-nodejs
+## Appointment Scheduling Nodes.js Backend
 Appointment Scheduling with Google Calender API and Node JS
 
-## App Installation:
-npm install
+### App Installation:
+> npm install
 
-## Start application:
-npm start
+### Start application:
+> npm start
 
-## To use your own Google Calender API Credentials please change file below
+### To use your own Google Calender API Credentials please change file below
 > ./credentials.js
 
-## To change port please refer to server.js file in bottom section
+### To change port please refer to server.js file in bottom section
 > port used currently: 8081
 
-## Requirements:
+### Requirements:
 
 - All appointments are 40 minutes long and have fixed times, starting from 9–9:40 am
 - Ensure there is always a 5 minute break in between each appointment
@@ -23,9 +23,9 @@ npm start
 - For simplicity, use UTC time for all bookings and days and ISO 8601 format for timeslots 
 
 
-## Endpoints 
+### Endpoints 
 
-### GET bookable days
+#### GET bookable days
 Requires a year and month. Note that months must not be zero-indexed.
 
 > __GET__  /days?year=yyyy&month=mm
@@ -68,7 +68,7 @@ Returns a list of all 40-minute time slots available for that day as an array of
 }
 ```
 
-### POST book an appointment
+#### POST book an appointment
 
 Requires a year, month, day, hour, and minute.
 
@@ -93,7 +93,7 @@ If not successful, return a message, a string for the error message.
 }
 ```
 
-### Error messages for this POST request are:
+#### Error messages for this POST request are:
 
 - Invalid time slot: The time slot provided was not one of the time slots returned in the GET available time slots request
 - Cannot book with less than 24 hours in advance
@@ -107,7 +107,6 @@ Error messages for ALL endpoints should be in this format:
     "success": false,
     "message": "Invalid time slot"
 }
-
 ```
 
 Where message contains the corresponding error message, such as Request is missing parameter: year
