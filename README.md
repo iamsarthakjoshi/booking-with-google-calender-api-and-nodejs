@@ -1,16 +1,16 @@
 ## Appointment Scheduling Nodes.js Backend
 Appointment Scheduling with Google Calender API and Node JS
 
-### App Installation:
+#### Install Dependencies:
 > npm install
 
-### Start application:
+#### Start server:
 > npm start
 
-### To use your own Google Calender API Credentials please change file below
+#### Google Calender API Credentials 
 > ./credentials.js
 
-### To change port please refer to server.js file in bottom section
+#### Port Used, refer server.js file
 > port used currently: 8081
 
 ### Requirements:
