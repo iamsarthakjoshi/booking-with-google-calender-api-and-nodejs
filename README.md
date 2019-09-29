@@ -15,7 +15,7 @@ Appointment Scheduling with Google Calender API and Node JS
 
 ### Requirements:
 
-- All appointments are __40 minutes__ long and have __40fixed times__40, starting from 9–9:40 am
+- All appointments are __40 minutes__ long and have __fixed times__, starting from 9–9:40 am
 - Ensure there is always a __5 minutes break__ in between each appointment
 - Appointments can only be booked during __weekdays__ from __9 am to 6 pm__
 - Bookings can only be made at least __24 hours in advance__
