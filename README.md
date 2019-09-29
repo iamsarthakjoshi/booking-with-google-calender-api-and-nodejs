@@ -10,6 +10,9 @@ npm start
 # To use your own Google Calender API Credentials please change file below
 ./credentials.js
 
+# To change port please refer to server.js file in bottom section
+port used currently: 8081
+
 # Requirements:
 
 - All appointments are 40 minutes long and have fixed times, starting from 9–9:40 am
