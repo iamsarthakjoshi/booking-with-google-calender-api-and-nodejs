@@ -50,6 +50,7 @@ app.get('/', function(req, res) {
             console.log(`${start} - ${event.summary}`);
           });
         }
+        // end of for debugging
 
         res.header('Content-Type', 'application/json');
         res.send(JSON.stringify(response.data.items, null, 2));
@@ -59,7 +60,7 @@ app.get('/', function(req, res) {
 });
 
 // Return point for oAuth flow, should match googleConfig.redirectURL
-app.get('/myauth', function(req, res) {
+app.get('/oauth/callback', function(req, res) {
 
     var code = req.param('code');
 
@@ -68,11 +69,9 @@ app.get('/myauth', function(req, res) {
       oAuthClient.getToken(code, function(err, tokens) {
 
         if (err) {
-          console.log('Error authenticating')
-          console.log(err);
+          console.log(`Error authenticating: ${err}`);
         } else {
           console.log('Successfully authenticated!!!!!');
-          console.log(tokens);
           
           // Store our credentials and redirect back to our main page
           oAuthClient.setCredentials(tokens);
