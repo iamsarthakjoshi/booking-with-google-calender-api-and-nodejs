@@ -13,9 +13,14 @@ var app = express(),
                       credentials.clientSecret, 
                       credentials.redirectURL),
     authorized = false;
+    redirectUrl = '/';
 
 // Response for localhost:
-app.get('/', function(req, res) {
+app.get('/days', function(req, res) {
+  const year = req.query.year;
+  const month = req.query.month-1;
+  redirectUrl = `/days?year=${year}&month=${month+1}`;
+
   // If we're not authenticated, fire off the OAuth flow
   if (!authorized) {
     // Generate an OAuth URL and redirect there
@@ -26,34 +31,44 @@ app.get('/', function(req, res) {
     res.redirect(url);
   } 
   else {
+    var startDate = new Date(year, month, 1).toUTCString();
+    var endDate =new Date(year, month + 1, 0).toUTCString();
+
+
     // Call google to fetch events for today on our calendar
     calendar.events.list({
       calendarId: 'primary',
       maxResults: 20,
-      timeMin: '2019-09-01T00:00:00.000Z',
-      timeMax: '2019-09-30T00:00:00.000Z',
+      timeMin: new Date(startDate).toISOString(),
+      timeMax: new Date(endDate).toISOString(),
       auth: oAuthClient
     }, function(err, response) {
       if(err) 
         console.log(`Error fetching events: ${err}`);
       else 
       {
-        // Send our JSON response back to the browser
         console.log(`Successfully fetched events`);
 
-        // for debugging
-        if (response.length) {
-          console.log(`Upcoming 10 events:`);
-          const events = response.data.items;
-          events.map((event, i) => {
-            const start = event.start.dateTime || event.start.date;
-            console.log(`${start} - ${event.summary}`);
-          });
-        }
-        // end of for debugging
+        const events = response.data.items;
 
+        // filter Canceled Events, Excludes Weekends, Excludes < 9am && > 6pm time slots 
+        const filteredEvents = events.filter(data => data.status=='confirmed' &&
+                              (new Date(data.start.dateTime).getDay()!=0 && 
+                              new Date(data.start.dateTime).getDay()!=6)
+                              && (new Date(data.start.dateTime).getHours() > 8 
+                              && new Date(data.start.dateTime).getHours() < 18));
+
+        // filter events which exists between 9am - 6pm incl.
+
+        // map through confirmed events
+        filteredEvents.map((event, i) => {
+          const start = event.start.dateTime || event.start.date;
+          console.log(`${i}) ${start} - ${new Date(start).getDay()} - ${new Date(start).getHours()}hrs - ${event.summary}`);
+        });
+        
+        // Send JSON response back to the browser
         res.header('Content-Type', 'application/json');
-        res.send(JSON.stringify(response.data.items, null, 2));
+        res.send(JSON.stringify(filteredEvents, null, 2));
       } 
     });
   }
@@ -76,7 +91,7 @@ app.get('/oauth/callback', function(req, res) {
           // Store our credentials and redirect back to our main page
           oAuthClient.setCredentials(tokens);
           authorized = true;
-          res.redirect('/');
+          res.redirect(redirectUrl);
         }
       });
     } 
