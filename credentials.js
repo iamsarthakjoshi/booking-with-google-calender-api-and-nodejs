@@ -1,3 +1,7 @@
+/*
+  Author: Sarthak Joshi
+  Email: iamsarthakjoshi@gmail.com
+*/
 // Google OAuth Configuration
 module.exports.credentials = {
   clientID: '200692833635-6dir4ef3c15fhuphe8jnq76ldcjttq32.apps.googleusercontent.com',

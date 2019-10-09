@@ -1,3 +1,7 @@
+/*
+  Author: Sarthak Joshi
+  Email: iamsarthakjoshi@gmail.com
+*/
 module.exports.timeslots = 
   [
     {'start':'09:00:00.000Z', 'end':'09:40:00.000Z'}, // first appointment

@@ -1,3 +1,8 @@
+/*
+  Author: Sarthak Joshi
+  Email: iamsarthakjoshi@gmail.com
+*/
+
 // Dependency setup
 const express = require('express'),
       moment = require('moment'),
