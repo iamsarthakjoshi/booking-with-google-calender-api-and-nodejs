@@ -2,12 +2,7 @@
 Appointment Scheduling with Google Calender API and Node JS
 
 #### Demo:
-- Get bookable days
-> https://bit.ly/days-2019-10-16
-- Get avaiable timeslots
-> https://bit.ly/timeslots-2019-10-16
-- *Book an appointment
-> http://bit.ly/book-2019-10-16-14-15
+> https://drive.google.com/open?id=1uOs53fzj0K4JadflYu-HjRHHpGLevwiK
 
 *Note: Booking must be done after getting available timeslots (as per the requirements)
 
