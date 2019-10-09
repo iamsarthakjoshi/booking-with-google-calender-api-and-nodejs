@@ -26,7 +26,7 @@ app.get('/days', function(req, res) {
     // Generate an OAuth URL and redirect there
     var url = oAuthClient.generateAuthUrl({
       access_type: 'offline',
-      scope: 'https://www.googleapis.com/auth/calendar.readonly'
+      scope: 'https://www.googleapis.com/auth/calendar'
     });
     res.redirect(url);
   } 
