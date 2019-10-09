@@ -18,7 +18,8 @@ var app = express(),
     oAuthClient = new google.auth.OAuth2(cred.clientID, cred.clientSecret, cred.redirectURL),
     authorized = false,
     redirectUrl = '/',
-    availableTimeSlots= [];
+    availableTimeSlots= []
+    fixedTimeSlotsNotFormatted = true;
 
 // get avaibility of timeslots for each day in given month and year
 app.get('/days', function(req, res) {
@@ -117,13 +118,6 @@ app.get('/timeslots', function(req, res) {
       scope: 'https://www.googleapis.com/auth/calendar'
     });
 
-    // reformat the fixed timeslots in ISO format
-    // from 09:00:00.000Z to 2019-10-16T09:00:00.000Z
-    fixedTimeSlots.forEach((d,c)=>{
-      fixedTimeSlots[c].start = `${year}-${month+1}-${day}T${d.start}`;
-      fixedTimeSlots[c].end = `${year}-${month+1}-${day}T${d.end}`;
-    });
-
     res.redirect(url);
   }else{
     calendar.events.list({
@@ -142,6 +136,16 @@ app.get('/timeslots', function(req, res) {
         var events = response.data.items; // get response from google calender api
         var output = {"success": false};
         var bookedTimeSlots=[];
+
+        if(fixedTimeSlotsNotFormatted) {
+          // reformat the fixed timeslots in ISO format
+          // from 09:00:00.000Z to 2019-10-16T09:00:00.000Z
+            fixedTimeSlots.forEach((d,c)=>{
+            fixedTimeSlots[c].start = `${year}-${month+1}-${day}T${d.start}`;
+            fixedTimeSlots[c].end = `${year}-${month+1}-${day}T${d.end}`;
+          });
+          fixedTimeSlotsNotFormatted = false;
+        }
 
         // filter Canceled Events, Excludes Weekends, Excludes < 9am && > 6pm time slots 
         var bookedAppoinements = events.filter(data => 
