@@ -1,13 +1,23 @@
 ## Appointment Scheduling Nodes.js Backend
 Appointment Scheduling with Google Calender API and Node JS
 
+#### Demo:
+- Get bookable days
+> https://bit.ly/sarthakj/days?year=2019&month=10
+- Get avaiable timeslots
+> https://bit.ly/sarthakj/timeslots?year=2019&month=10&day=16
+- *Book an appointment
+> https://bit.ly/sarthakj/book?year=2019&month=10&day=16&hour=14&minute=15
+
+*Note: Booking must be done after getting available timeslots (as per the requirements)
+
 #### Install Dependencies:
 > npm install
 
 #### Start server:
 > npm start
 
-#### Google Calender API Credentials 
+#### Change Google Calender API Credentials 
 > ./credentials.js
 
 #### Port Used, refer server.js file
